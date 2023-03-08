@@ -12,6 +12,6 @@ export default defineConfig({
     }
   },
   server: {
-    open: true
+    open: true // 配置启动项目后自动打开网址
   }
 })
