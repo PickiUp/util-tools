@@ -23,7 +23,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
+    },
+    extensions: ['.js', '.ts', '.vue']
   },
   server: {
     open: false // 配置启动项目后自动打开网址
