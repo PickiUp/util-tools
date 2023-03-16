@@ -1,21 +1,22 @@
 <template>
 	<CommonTopHeader />
-
+	<h1>你就不能搜索一下吗?</h1>
 	<el-tabs v-model="activeName" type="border-card" class="searchTabs">
-		<el-tab-pane :label="key" v-for="(value, key, index) in tabs" :key="index">
+		<el-tab-pane :label="value[0]" v-for="(value, key, index) in tabs" :key="index">
 			<ul>
 				<li>
-					<div v-if="index === 0" class="site-name">输入关键字：</div>
-					<el-input v-if="index === 0" v-model="queryKey">
+					<div class="site-name">输入关键字：</div>
+					<el-input v-model="queryKey" clearable>
 					</el-input>
 				</li>
-				<li v-for="(siteValue, siteName, index) in value" :key="index">
-
-					<div class="site-name">{{ siteName }}</div>
-					<el-input v-model="siteValue.queryKeyWord" placeholder="请输入访问关键字">
-						<template #prepend> {{ siteValue.baseUrl }}</template>
-					</el-input>
-					<el-button :icon="Search" type="success" @click="handleLinkAccess(siteValue, index)" />
+				<li v-for="(siteValue, index) in value" :key="index">
+					<template v-if="index > 0">
+						<div class="site-name">{{ siteValue.siteName }}</div>
+						<el-input v-model="siteValue.queryKeyWord" placeholder="请输入访问关键字" clearable>
+							<template #prepend> {{ siteValue.baseUrl }}</template>
+						</el-input>
+						<el-button :icon="Search" type="success" @click="handleLinkAccess(siteValue, index)" />
+					</template>
 				</li>
 			</ul>
 		</el-tab-pane>
@@ -28,64 +29,127 @@ import CommonTopHeader from "../components/CommonTopHeader.vue";
 // --------暴露数据----------------
 const queryKey = ref('');
 const siteList = {
+	// ------------搜索引擎----------------
 	// github
 	github: {
+		siteName: "Github",
 		baseUrl: "https://github.com/search?q=",
+		queryKeyWord: "",
+	},
+	// google
+	google: {
+		siteName: "google",
+		baseUrl: "https://www.google.com/search?q=",
+		queryKeyWord: "",
+	},
+	// duckduckgo
+	duckduckgo: {
+		siteName: "duckduckgo",
+		baseUrl: "https://duckduckgo.com/?q=",
+		queryKeyWord: "",
+	},
+	// baidu
+	baidu: {
+		siteName: "baidu",
+		baseUrl: "https://www.baidu.com/s?wd=",
+		queryKeyWord: "",
+	},
+	// bing
+	bing: {
+		siteName: "duckduckbinggo",
+		baseUrl: "https://www.bing.com/search?q=",
+		queryKeyWord: "",
+	},
+	// fsoufsou
+	fsoufsou: {
+		siteName: "fsoufsou",
+		baseUrl: "https://fsoufsou.com/search?q=",
+		queryKeyWord: "",
+	},
+	// yandex
+	yandex: {
+		siteName: "yandex",
+		baseUrl: "https://yandex.com/search/?text=",
+		queryKeyWord: "",
+	},
+	// wikipedia
+	wikipedia: {
+		siteName: "wikipedia",
+		baseUrl: "https://zh.wikipedia.org/w/index.php?go=%E5%89%8D%E5%BE%80&search=",
+		queryKeyWord: "",
+	},
+	// bilibili
+	bilibili: {
+		siteName: "bilibili（哔哩哔哩）",
+		baseUrl: "https://search.bilibili.com/all?keyword=",
+		queryKeyWord: "",
+	},
+	// ------------程序开发----------------
+	// stackoverflow
+	stackoverflow: {
+		siteName: "stackoverflow",
+		baseUrl: "https://stackoverflow.com/search?q=",
+		queryKeyWord: "",
+	},
+	juejin: {
+		siteName: "掘金",
+		baseUrl: "https://juejin.cn/search?query=",
+		queryKeyWord: "",
+	},
+	segmentfault: {
+		siteName: "segmentfault（思否）",
+		baseUrl: "https://segmentfault.com/search?q=",
+		queryKeyWord: "",
+	},
+	// ------------翻译----------------
+	// youdao
+	youdao: {
+		siteName: "有道词典",
+		baseUrl: "https://www.youdao.com/result?word=",
+		queryKeyWord: "",
+	},
+	// fanyiBaidu
+	fanyiBaidu: {
+		siteName: "百度翻译",
+		baseUrl: "https://fanyi.baidu.com/#en/cn/",
 		queryKeyWord: "",
 	},
 }
 const tabs = reactive({
-	SearchEngine: {
-		google: {
-			baseUrl: "https://www.google.com/search?q=",
-			queryKeyWord: "",
-		},
-		duckduckgo: {
-			baseUrl: "https://duckduckgo.com/?q=",
-			queryKeyWord: "",
-		},
-		baidu: {
-			baseUrl: "https://www.baidu.com/s?wd=",
-			queryKeyWord: "",
-		},
-		bing: {
-			baseUrl: "https://www.bing.com/search?q=",
-			queryKeyWord: "",
-		},
-		fsoufsou: {
-			baseUrl: "https://fsoufsou.com/search?q=",
-			queryKeyWord: "",
-		},
-		github: {
-			baseUrl: "https://github.com/search?q=",
-			queryKeyWord: "",
-		},
-		yandex: {
-			baseUrl: "https://yandex.com/search/?text=",
-			queryKeyWord: "",
-		},
-		wikipedia: {
-			baseUrl: "https://zh.wikipedia.org/w/index.php?go=%E5%89%8D%E5%BE%80&search=",
-			queryKeyWord: "",
-		},
-	},
-	imageGallery: {
-	},
-	VideoSites: {
-		github: {
-			baseUrl: "https://search.bilibili.com/all?keyword=",
-			queryKeyWord: "",
-		},
-	},
-	MusicSites: {
-	},
-	DevCommunity: {
+	SearchEngine: [
+		"搜索引擎",
+		siteList.google,
+		siteList.duckduckgo,
+		siteList.baidu,
+		siteList.bing,
+		siteList.fsoufsou,
+		siteList.yandex,
+		siteList.wikipedia,
+		siteList.github,
+	],
+	imageGallery: [
+		"图片资源",
+	],
+	VideoSites: [
+		"视频资源",
+		siteList.bilibili,
+	],
+	MusicSites: [
+		"音乐资源",
+	],
+	ProgramDevelopment: [
+		"编程开发",
+		siteList.stackoverflow,
+		siteList.github,
+		siteList.juejin,
+		siteList.segmentfault,
 
-		stackoverflow: {
-			baseUrl: "https://stackoverflow.com/search?q=",
-			queryKeyWord: "",
-		},
-	},
+	],
+	Translation: [
+		"在线翻译",
+		siteList.youdao,
+		siteList.fanyiBaidu,
+	],
 });
 
 // --------暴露函数----------------
@@ -95,9 +159,11 @@ const handleLinkAccess = (siteValue, index) => {
 };
 watch(queryKey, (newValue) => {
 	for (const tab in tabs) {
-		for (const t in tabs[tab]) {
-			tabs[tab][t].queryKeyWord = newValue;
-		}
+		tabs[tab].forEach((element, index) => {
+			if (index > 0) {
+				element.queryKeyWord = newValue;
+			}
+		});
 	}
 });
 </script>
