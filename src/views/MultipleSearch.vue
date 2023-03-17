@@ -1,21 +1,41 @@
 <template>
 	<CommonTopHeader />
-	<h1>你就不能搜索一下吗?</h1>
-	<el-tabs v-model="activeName" type="border-card" class="searchTabs">
+	<el-row class="title">
+		<h1>你就不能搜索一下吗?</h1>
+	</el-row>
+	<el-tabs type="border-card" class="searchTabs">
 		<el-tab-pane :label="value[0]" v-for="(value, key, index) in tabs" :key="index">
 			<ul>
 				<li>
-					<div class="site-name">输入关键字：</div>
-					<el-input v-model="queryKey" clearable>
-					</el-input>
+					<el-row :gutter="20">
+						<el-col class="grid-content" :span="4">
+							<div>输入关键字：</div>
+						</el-col>
+						<el-col class="grid-content" :span="10">
+							<el-input v-model="queryKey" clearable :prefix-icon="Search">
+							</el-input>
+						</el-col>
+						<el-col v-show="false" class="grid-content" :span="10">
+							<el-button :icon="Search" type="success" />
+						</el-col>
+					</el-row>
 				</li>
 				<li v-for="(siteValue, index) in value" :key="index">
 					<template v-if="index > 0">
-						<div class="site-name">{{ siteValue.siteName }}</div>
-						<el-input v-model="siteValue.queryKeyWord" placeholder="请输入访问关键字" clearable>
-							<template #prepend> {{ siteValue.baseUrl }}</template>
-						</el-input>
-						<el-button :icon="Search" type="success" @click="handleLinkAccess(siteValue, index)" />
+						<el-row :gutter="20">
+							<el-col class="grid-content" :span="4">
+								<div>{{ siteValue.siteName }}
+								</div>
+							</el-col>
+							<el-col class="grid-content" :span="10">
+								<el-input v-model="siteValue.queryKeyWord" placeholder="请输入访问关键字" :prefix-icon="Search"
+									clearable>
+								</el-input>
+							</el-col>
+							<el-col class="grid-content" :span="10">
+								<el-button :icon="Search" type="success" @click="handleLinkAccess(siteValue, index)" />
+							</el-col>
+						</el-row>
 					</template>
 				</li>
 			</ul>
@@ -28,6 +48,7 @@ import { Search } from "@element-plus/icons-vue";
 import CommonTopHeader from "../components/CommonTopHeader.vue";
 // --------暴露数据----------------
 const queryKey = ref('');
+const activeName = ref(true);
 const siteList = {
 	// ------------搜索引擎----------------
 	// github
@@ -173,36 +194,37 @@ watch(queryKey, (newValue) => {
 	font-size: 15px;
 }
 
-.searchTabs ul {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
+/* element plus 组件样式 */
+
+.searchTabs .el-row {
+	margin-bottom: 20px;
+	left: 263px;
+	align-items: center;
 }
 
-.searchTabs .site-name {
-	display: inline-block;
-	padding-bottom: 40px;
-	min-width: 9%;
+.title {
+	justify-content: center;
 }
 
-.searchTabs ul li {
-	width: 100%;
+.el-row:last-child {
+	margin-bottom: 0;
 }
 
-.searchTabs ul li:first-child div[class='el-input'] {
-	width: 80%;
-	margin-right: 30px;
-	padding-bottom: 30px;
-	margin-top: 31px;
+.el-col {
+	border-radius: 4px;
 }
 
-.searchTabs .el-input>div.el-input-group__prepend {
-	min-width: 20%;
-	justify-content: left;
+.grid-content {
+	border-radius: 4px;
+	min-height: 36px;
 }
 
 ul {
 	list-style-type: none;
+}
+
+ul li {
+	margin-bottom: 20px;
 }
 
 .el-input-group {
