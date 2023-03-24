@@ -105,6 +105,13 @@ const siteList = {
 		baseUrl: "https://search.bilibili.com/all?keyword=",
 		queryKeyWord: "",
 	},
+	// --------视频资源--------
+	// youtube
+	youtube: {
+		siteName: "youtube",
+		baseUrl: "https://www.youtube.com/results?search_query=",
+		queryKeyWord: "",
+	},
 	// ------------程序开发----------------
 	// stackoverflow
 	stackoverflow: {
@@ -154,6 +161,7 @@ const tabs = reactive({
 	VideoSites: [
 		"视频资源",
 		siteList.bilibili,
+		siteList.youtube,
 	],
 	MusicSites: [
 		"音乐资源",
