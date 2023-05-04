@@ -2,7 +2,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 // 创建路由
 const router = createRouter({
-    history: createWebHistory('/util-tools/'),
+    history: createWebHistory('util-tools'),
     routes: [
         { name: "home", path: "/", component: () => import("../views/HomePage") },
         { name: "MultipleSearch", path: "/muti-search", component: () => import("../views/MultipleSearch") },
