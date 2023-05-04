@@ -28,5 +28,6 @@ export default defineConfig({
   },
   server: {
     open: false // 配置启动项目后自动打开网址
-  }
+  },
+  publicPath: `/util-tools/`
 })

@@ -1,23 +1,25 @@
 {
-  "name": "util-tools",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@element-plus/icons-vue": "^2.1.0",
-    "element-plus": "2.2.36",
-    "vue": "^3.2.47",
-    "vue-router": "4"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "^4.0.0",
-    "push-dir": "^0.4.1",
-    "unplugin-auto-import": "^0.15.1",
-    "unplugin-vue-components": "^0.24.1",
-    "vite": "^4.1.4"
-  }
+	"name": "util-tools",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+		"deploy-dist-to-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup",
+		"deploy": "git push origin main"
+	},
+	"dependencies": {
+		"@element-plus/icons-vue": "^2.1.0",
+		"element-plus": "2.2.36",
+		"vue": "^3.2.47",
+		"vue-router": "4"
+	},
+	"devDependencies": {
+		"@vitejs/plugin-vue": "^4.0.0",
+		"push-dir": "^0.4.1",
+		"unplugin-auto-import": "^0.15.1",
+		"unplugin-vue-components": "^0.24.1",
+		"vite": "^4.1.4"
+	}
 }
