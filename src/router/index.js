@@ -5,7 +5,7 @@ const router = createRouter({
     history: createWebHistory('/util-tools/'),
     routes: [
         { name: "home", path: "/", component: () => import("../views/HomePage") },
-        { name: "MultipleSearch", path: "/MultipleSearch", component: () => import("../views/MultipleSearch") },
+        { name: "MultipleSearch", path: "/muti-search", component: () => import("../views/MultipleSearch") },
         { name: "ObsidianVariousComplement", path: "/ob-dict-generator", component: () => import("../views/ObsidianVariousComplement") },
     ]
 })// 导出 路由 
