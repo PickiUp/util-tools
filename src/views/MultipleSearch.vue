@@ -112,7 +112,7 @@ const siteList = {
 		baseUrl: "https://www.youtube.com/results?search_query=",
 		queryKeyWord: "",
 	},
-	// ------------程序开发----------------
+	// ------------编程开发----------------
 	// stackoverflow
 	stackoverflow: {
 		siteName: "stackoverflow",
@@ -120,13 +120,18 @@ const siteList = {
 		queryKeyWord: "",
 	},
 	juejin: {
-		siteName: "掘金",
+		siteName: "juejin (掘金)",
 		baseUrl: "https://juejin.cn/search?query=",
 		queryKeyWord: "",
 	},
 	segmentfault: {
 		siteName: "segmentfault（思否）",
 		baseUrl: "https://segmentfault.com/search?q=",
+		queryKeyWord: "",
+	},
+	zhihu: {
+		siteName: "zhihu（知乎）",
+		baseUrl: "https://www.zhihu.com/search?type=content&q=",
 		queryKeyWord: "",
 	},
 	// ------------翻译----------------
@@ -154,6 +159,8 @@ const tabs = reactive({
 		siteList.yandex,
 		siteList.wikipedia,
 		siteList.github,
+		siteList.zhihu,
+
 	],
 	imageGallery: [
 		"图片资源",
@@ -172,6 +179,7 @@ const tabs = reactive({
 		siteList.github,
 		siteList.juejin,
 		siteList.segmentfault,
+		siteList.zhihu,
 
 	],
 	Translation: [
@@ -198,7 +206,8 @@ watch(queryKey, (newValue) => {
 </script>
 <style >
 .searchTabs {
-	font-family: Helvetica;
+	font-family: sans-serif;
+	font-weight: bold;
 	font-size: 15px;
 }
 
