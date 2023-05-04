@@ -7,7 +7,7 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"deploy-dist-to-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup",
-		"deploy": "git push origin main"
+		"deploy": "sh deploy.sh"
 	},
 	"dependencies": {
 		"@element-plus/icons-vue": "^2.1.0",
