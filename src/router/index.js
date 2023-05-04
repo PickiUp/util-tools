@@ -1,8 +1,8 @@
 // 导入 路由相关模块 createRouter 和 createMemoryHistory
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 // 创建路由
 const router = createRouter({
-    history: createWebHistory('util-tools'),
+    history: createWebHashHistory('util-tools'),
     routes: [
         { name: "home", path: "/", component: () => import("../views/HomePage") },
         { name: "MultipleSearch", path: "/muti-search", component: () => import("../views/MultipleSearch") },
