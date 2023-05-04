@@ -15,4 +15,9 @@ git add -A
 git commit -m 'deploy'
 # 将当前 dist 仓库的 main 分支 提交到 git@github.com:PickiUp/util-tools.git 项目的 gh-pages 分支
 git push -f git@github.com:PickiUp/util-tools.git main:gh-pages
+if [ $? -ne 0 ]; then
+    rm -rf .git
+else
+    echo "failed to push dist folder to gh-pages branch on origin"
+fi
 cd -
