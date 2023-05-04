@@ -29,5 +29,5 @@ export default defineConfig({
   server: {
     open: false // 配置启动项目后自动打开网址
   },
-  publicPath: `/util-tools/`
+  base: process.env.NODE_ENV === 'production' ? '/util-tools/' : '',
 })
