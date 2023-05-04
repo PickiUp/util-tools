@@ -17,7 +17,8 @@ git commit -m 'deploy'
 git push -f git@github.com:PickiUp/util-tools.git main:gh-pages
 if [ $? -ne 0 ]; then
     rm -rf .git
+    echo -e "\033[33m Push the  dist folder to gh-pages branch on origin successfully \033[0m"
 else
-    echo "failed to push dist folder to gh-pages branch on origin"
+    echo "\033[32m Failed to push dist folder to gh-pages branch on origin \033[0m"
 fi
 cd -
