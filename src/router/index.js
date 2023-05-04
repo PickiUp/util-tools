@@ -4,11 +4,9 @@ import { createRouter, createWebHistory } from "vue-router";
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { name: "home", path: "/", component: () => import("../views/HomePage.vue") },
-        { name: "test", path: "/test", component: () => import("../views/TestPage.vue") },
-
+        { name: "home", path: "/", component: () => import("../views/HomePage") },
+        { name: "MultipleSearch", path: "/MultipleSearch", component: () => import("../views/MultipleSearch") },
+        { name: "ObsidianVariousComplement", path: "/ob-dict-generator", component: () => import("../views/ObsidianVariousComplement") },
     ]
-})
-
-// 导出 路由 
+})// 导出 路由 
 export default router
