@@ -5,8 +5,8 @@ const router = createRouter({
     history: createWebHashHistory('util-tools'),
     routes: [
         { name: "home", path: "/", component: () => import("../views/HomePage") },
-        { name: "MultipleSearch", path: "/muti-search", component: () => import("../views/MultipleSearch") },
-        { name: "ObsidianVariousComplement", path: "/ob-dict-generator", component: () => import("../views/ObsidianVariousComplement") },
+        { name: "MultipleSearch", path: "/mutiSearch", component: () => import("../views/MultipleSearch") },
+        { name: "ObsidianVariousComplement", path: "/obDictGenerator", component: () => import("../views/ObsidianVariousComplement") },
     ]
 })// 导出 路由 
 export default router
