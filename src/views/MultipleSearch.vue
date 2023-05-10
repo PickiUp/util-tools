@@ -3,8 +3,8 @@
 	<el-row class="title">
 		<h1>你就不能搜索一下吗?</h1>
 	</el-row>
-	<el-tabs type="border-card" class="searchTabs">
-		<el-tab-pane :label="value[0]" v-for="(value, key, index) in tabs" :key="index">
+	<el-tabs v-model="activeName" type="border-card" class="searchTabs">
+		<el-tab-pane :name="value[0]" :label="value[0]" v-for="(value, key, index) in tabs" :key="index">
 			<ul>
 				<li>
 					<el-row :gutter="20">
@@ -48,7 +48,7 @@ import { Search } from "@element-plus/icons-vue";
 import CommonTopHeader from "../components/CommonTopHeader.vue";
 // --------暴露数据----------------
 const queryKey = ref('');
-const activeName = ref(true);
+const activeName = ref('搜索引擎');
 const siteList = {
 	// --------AI 搜索--------
 	// phind
@@ -83,6 +83,14 @@ const siteList = {
 		queryKeyWord: "",
 		desc: '号称全球第一个可以聊天的AI搜索引擎'
 	},
+	// iask
+	iask: {
+		icon: 'https://img1.imgtp.com/2023/05/10/GoidroBV.png',
+		siteName: "iask",
+		baseUrl: "https://iask.ai/?mode=question&q=",
+		queryKeyWord: "",
+		desc: 'The Free AI search engine utilizes similar technologies to ChatGPT, but in addition to it harnessing a highly optimized natural language processing (NLP) model, iAsk AI also …'
+	},
 
 	// ------------搜索引擎----------------
 	// github
@@ -95,7 +103,7 @@ const siteList = {
 	},
 	// google
 	google: {
-		icon: 'http://sousuo.org.cn/images/google.ico',
+		icon: 'https://pic7.58cdn.com.cn/nowater/webim/big/n_v2e96cf87e54f046ec870930b3c54fbf04.png',
 		siteName: "google",
 		baseUrl: "https://www.google.com/search?q=",
 		queryKeyWord: "",
@@ -103,7 +111,7 @@ const siteList = {
 	},
 	// duckduckgo
 	duckduckgo: {
-		icon: 'http://sousuo.org.cn/images/duckduckgo.ico',
+		icon: 'https://pic7.58cdn.com.cn/nowater/webim/big/n_v2b666141fa7ec4a3799a227ec0a6cf72d.png',
 		siteName: "duckduckgo",
 		baseUrl: "https://duckduckgo.com/?q=",
 		queryKeyWord: "",
@@ -111,7 +119,7 @@ const siteList = {
 	},
 	// baidu
 	baidu: {
-		icon: 'http://sousuo.org.cn/images/baidu.ico',
+		icon: 'https://pic7.58cdn.com.cn/nowater/webim/big/n_v2bb555dd32c6446f38d166d8c89f7206c.png',
 		siteName: "baidu",
 		baseUrl: "https://www.baidu.com/s?wd=",
 		queryKeyWord: "",
@@ -119,7 +127,7 @@ const siteList = {
 	},
 	// bing
 	bing: {
-		icon: 'http://sousuo.org.cn/images/bing.ico',
+		icon: 'https://pic7.58cdn.com.cn/nowater/webim/big/n_v25467b56e2d6f4f01ad36fc251b34523e.png',
 		siteName: "bing",
 		baseUrl: "https://www.bing.com/search?q=",
 		queryKeyWord: "",
@@ -127,7 +135,7 @@ const siteList = {
 	},
 	// fsoufsou
 	fsoufsou: {
-		icon: '#',
+		icon: 'https://pic7.58cdn.com.cn/nowater/webim/big/n_v21ebdee086c5f4b7ea76384e1198349be.png',
 		siteName: "fsoufsou",
 		baseUrl: "https://fsoufsou.com/search?q=",
 		queryKeyWord: "",
@@ -135,7 +143,7 @@ const siteList = {
 	},
 	// yandex
 	yandex: {
-		icon: 'http://sousuo.org.cn/images/yandex.ico',
+		icon: 'https://pic7.58cdn.com.cn/nowater/webim/big/n_v27dc2e56b403d4130a13523129295f8e5.png',
 		siteName: "yandex",
 		baseUrl: "https://yandex.com/search/?text=",
 		queryKeyWord: "",
@@ -149,11 +157,11 @@ const siteList = {
 		queryKeyWord: "",
 		desc: ''
 	},
-	// bilibili
-	bilibili: {
-		icon: 'https://pic7.58cdn.com.cn/nowater/webim/big/n_v2108360248b8e4e5a8434675619fe2d3b.png',
-		siteName: "bilibili（哔哩哔哩）",
-		baseUrl: "https://search.bilibili.com/all?keyword=",
+	// quora
+	quora: {
+		icon: 'https://icons.veryicon.com/128/Internet%20%26%20Web/Simple%201/wikipedia.png',
+		siteName: "quora",
+		baseUrl: "https://www.quora.com/search?q=",
 		queryKeyWord: "",
 		desc: ''
 	},
@@ -166,6 +174,23 @@ const siteList = {
 		queryKeyWord: "",
 		desc: ''
 	},
+	// bilibili
+	bilibili: {
+		icon: 'https://pic7.58cdn.com.cn/nowater/webim/big/n_v2108360248b8e4e5a8434675619fe2d3b.png',
+		siteName: "bilibili（哔哩哔哩）",
+		baseUrl: "https://search.bilibili.com/all?keyword=",
+		queryKeyWord: "",
+		desc: ''
+	},
+	// douyin
+	douyin: {
+		icon: 'https://img1.imgtp.com/2023/05/10/VDUampNa.png',
+		siteName: "douyin（抖音）",
+		baseUrl: "https://www.douyin.com/search/",
+		queryKeyWord: "",
+		desc: ''
+	},
+
 	// --------Icon图标--------
 	// veryicon
 	veryicon: {
@@ -174,6 +199,14 @@ const siteList = {
 		baseUrl: "https://www.veryicon.com/search/",
 		queryKeyWord: "",
 		desc: ''
+	},
+	// iconfinder
+	iconfinder: {
+		icon: 'https://img1.imgtp.com/2023/05/10/01g0okVB.png',
+		siteName: "iconfinder",
+		baseUrl: "https://www.iconfinder.com/search?q=",
+		queryKeyWord: "",
+		desc: 'Download 38 intro icons. Available in PNG and SVG formats. Ready to be used in web design, mobile apps and presentations. Download 38 intro icons. Available in …'
 	},
 	// ------------编程开发----------------
 	// stackoverflow
@@ -219,8 +252,16 @@ const siteList = {
 		siteName: "zhihu（知乎）",
 		baseUrl: "https://www.zhihu.com/search?type=content&q=",
 		queryKeyWord: "",
-		desc: ''
+		desc: '知乎是一家中国大陆的社会化问答网站，创立于2011年1月26日，产品形态与美国在线问答网站Quora类似。“知乎”在文言文中意为“知道吗”。'
 	},
+	answers: {
+		icon: 'https://img1.imgtp.com/2023/05/10/V5XOrSR4.png',
+		siteName: "answers",
+		baseUrl: "https://www.answers.com/search?q=",
+		queryKeyWord: "",
+		desc: 'Answers.com曾用名WikiAnswers ，是一个互联网知识交流平台。'
+	},
+
 	cnblog: {
 		icon: 'https://pic7.58cdn.com.cn/nowater/webim/big/n_v246fa4365b37747c787b4eb6b10f96c52.png',
 		siteName: "博客园",
@@ -238,7 +279,7 @@ const siteList = {
 	// ------------翻译----------------
 	// youdao
 	youdao: {
-		icon: 'http://sousuo.org.cn/images/google.ico',
+		icon: 'https://pic7.58cdn.com.cn/nowater/webim/big/n_v2858d0a0bf58645449bce63beb218a7b0.png',
 		siteName: "有道词典",
 		baseUrl: "https://www.youdao.com/result?word=",
 		queryKeyWord: "",
@@ -247,7 +288,7 @@ const siteList = {
 	},
 	// fanyiBaidu
 	fanyiBaidu: {
-		icon: 'http://sousuo.org.cn/images/google.ico',
+		icon: 'https://pic7.58cdn.com.cn/nowater/webim/big/n_v27814f710ca714ee18c67eb01b9e16e7b.png',
 		siteName: "百度翻译",
 		baseUrl: "https://fanyi.baidu.com/#en/cn/",
 		queryKeyWord: "",
@@ -256,23 +297,43 @@ const siteList = {
 	},
 	// volcengine
 	volcengine: {
-		icon: 'http://sousuo.org.cn/images/google.ico',
+		icon: 'https://pic7.58cdn.com.cn/nowater/webim/big/n_v2b38deef4abd643a59e993728481460aa.png',
 		siteName: "火山翻译（字节）",
 		baseUrl: "https://translate.volcengine.com/?category=&home_language=zh&source_language=detect&target_language=zh&text=",
 		queryKeyWord: "",
 		desc: ''
 
 	},
+	// -----------------图片资源-----------------
+	// unsplash
+	unsplash: {
+		icon: 'https://s2.loli.net/2023/05/10/cWrNwGOvA2VEn45.png',
+		siteName: "unsplash",
+		baseUrl: "https://unsplash.com/s/photos/",
+		queryKeyWord: "",
+		desc: 'Unsplash是一个免费的照片共享网站。摄影师可以将照片上传到Unsplash，照片编辑者们会对用户上传的照片进行整理。'
+
+	},
+	// pexels
+	pexels: {
+		icon: 'https://img1.imgtp.com/2023/05/10/g0IRc7VA.png',
+		siteName: "pexels",
+		baseUrl: "https://www.pexels.com/zh-cn/search/",
+		queryKeyWord: "",
+		desc: '免费库存照片和视频，您可以在任何地方使用。浏览数百万高质量的免版税库存图片和免版权图片。无需归属。'
+
+	},
+	// pixabay
+	pixabay: {
+		icon: 'https://img1.imgtp.com/2023/05/10/Ds0Yk9aI.png',
+		siteName: "pixabay",
+		baseUrl: "https://pixabay.com/images/search/",
+		queryKeyWord: "",
+		desc: 'Pixabay.com是一个照片、插图、矢量图形、电影片段和音乐分享网站。该网站上的图片涵盖的主体较多，但品质被一些评论认为较为平庸。'
+
+	},
 }
 const tabs = reactive({
-	AISearch: [
-		"AI搜索",
-		siteList.phind,
-		siteList.youCom,
-		siteList.consensus,
-		siteList.perplexity,
-
-	],
 	SearchEngine: [
 		"搜索引擎",
 		siteList.google,
@@ -284,22 +345,24 @@ const tabs = reactive({
 		siteList.wikipedia,
 		siteList.github,
 		siteList.zhihu,
+		siteList.quora,
+	],
+	AskAndAnswer: [
+		"提问回答",
+		siteList.stackoverflow,
+		siteList.stackexchange,
+		siteList.quora,
+		siteList.zhihu,
+		siteList.segmentfault,
+	],
+	AISearch: [
+		"AI搜索",
+		siteList.phind,
+		siteList.youCom,
+		siteList.consensus,
+		siteList.perplexity,
+		siteList.iask,
 
-	],
-	imageGallery: [
-		"图片资源",
-	],
-	IconHub: [
-		"图标素材",
-		siteList.veryicon,
-	],
-	VideoSites: [
-		"视频资源",
-		siteList.bilibili,
-		siteList.youtube,
-	],
-	MusicSites: [
-		"音乐资源",
 	],
 	ProgramDevelopment: [
 		"编程开发",
@@ -312,7 +375,26 @@ const tabs = reactive({
 		siteList.zhihu,
 		siteList.cnblog,
 		siteList.goobe,
-
+	],
+	imageGallery: [
+		"图片资源",
+		siteList.unsplash,
+		siteList.pexels,
+		siteList.pixabay,
+	],
+	IconHub: [
+		"图标素材",
+		siteList.veryicon,
+		siteList.iconfinder,
+	],
+	VideoSites: [
+		"视频资源",
+		siteList.bilibili,
+		siteList.youtube,
+		siteList.douyin,
+	],
+	MusicSites: [
+		"音乐资源",
 	],
 	Translation: [
 		"在线翻译",
